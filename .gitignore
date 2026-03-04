@@ -1,0 +1,11 @@
+usd_root/
+paint_sim/
+__pycache__/
+*.pyc
+*.cache
+*.png
+*.jpg
+*.jpeg
+*.gifusd_root/
+__pycache__/
+*.pyc
