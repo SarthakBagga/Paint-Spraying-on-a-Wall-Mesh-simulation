@@ -8,6 +8,8 @@ The resulting textures are applied to a **3D wall model in OpenUSD**, allowing t
 
 The simulation mimics real industrial spray-coating systems by moving the spray nozzle in a **serpentine pattern across the wall**, gradually building up paint layers until the surface is uniformly coated.
 
+This project has been made with respect to the assignment guidelines provided.
+
 ---
 
 ## Key Features
@@ -53,116 +55,4 @@ The simulation mimics real industrial spray-coating systems by moving the spray 
 
 
 
-
----
-
-## Simulation Workflow
-
-The simulation follows several steps:
-
-### 1. Create Wall Geometry
-
-A wall surface is generated using OpenUSD.
-
-```
-python wall_model.py
-```
-
-This creates:
-
-```
-wall.usda
-```
-
-The wall is represented as a mesh that acts as the paint target.
-
----
-
-### 2. Run the Spray Simulation
-
-```
-python spray_sim.py
-```
-
-The simulation performs:
-
-1. Compute nozzle path across the wall
-2. Emit spray particles using Warp
-3. Generate droplet deposition on the wall surface
-4. Accumulate paint thickness
-5. Save texture frames
-
-Outputs include:
-
-```
-paint_step_000.png
-paint_step_001.png
-...
-paint_step_239.png
-paint_final.png
-```
-
----
-
-### 3. Apply the Paint Texture
-
-```
-python apply_texture.py
-```
-
-This attaches the generated paint texture to the wall mesh in the USD scene.
-
-Output:
-
-```
-wall_painted.usda
-```
-
----
-
-### 4. Visualize in usdview
-
-Navigate to the OpenUSD tools directory:
-
-```
-cd usd_root
-source python-usd-venv/bin/activate
-./scripts/usdview_gui.sh ../wall_painted.usda
-```
-
-You will see the painted wall with the applied texture.
-
----
-
-
-
-Multiple sweeps ensure uniform coverage.
-
----
-
-## Simulation Parameters
-
-Key parameters controlling the simulation that i made:
-
-| Parameter           | Description                           |
-| ------------------- | ------------------------------------- |
-| `N_PARTICLES`       | Number of spray particles emitted     |
-| `N_DROPLETS`        | Number of droplets deposited per step |
-| `N_SWEEPS`          | Number of complete wall passes        |
-| `SPRAY_SPREAD`      | Width of the spray cone               |
-| `GAUSSIAN_SIGMA`    | Controls spray falloff                |
-| `SPRAY_WORLD_SIGMA` | Spread of droplets on wall            |
-| `RES`               | Texture resolution                    |
-
----
-
-
-Install dependencies:
-
-```
-pip install warp-lang numpy pillow
-pip install usd-core
-```
-
----
 
